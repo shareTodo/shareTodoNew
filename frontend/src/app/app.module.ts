@@ -6,10 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule, MatCheckboxModule, MatInputModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './components/navigator/nav.component';
+import { RegisterComponent } from './components/auth/register/register.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { AppRoutingModule } from './app-routing/app-routing.module'
 
@@ -18,7 +20,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
   declarations: [
     AppComponent,
     NavComponent,
-    LoginComponent
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module'
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

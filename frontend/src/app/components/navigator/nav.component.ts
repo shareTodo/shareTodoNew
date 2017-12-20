@@ -8,5 +8,9 @@ import { Component } from '@angular/core';
 })
 
 export class NavComponent {
+  signedIn: boolean;
 
+  constructor() {
+    this.signedIn = false;
+  }
 }

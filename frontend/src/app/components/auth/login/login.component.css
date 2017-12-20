@@ -1,4 +1,19 @@
-.form-container {
+#login-container {
   display: flex;
-  flex-direction: column;
+  display: -webkit-flex;
+  align-items: center;
+}
+
+#login-container #friend-img {
+  flex: 1;
+  width: 50%;
+}
+
+#login-container #form-container {
+  flex: 1;
+  text-align: center;
+}
+
+#login-container .form-fields {
+  display: inline-grid;
 }
