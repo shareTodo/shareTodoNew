@@ -1,0 +1,16 @@
+#register-container {
+  position: relative;
+}
+#register-container .form-fields {
+  display: inline-grid;
+}
+
+#register-container .radioBtn-options {
+  display: grid;
+}
+
+#register-container #quitBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

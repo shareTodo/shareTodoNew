@@ -1,0 +1,35 @@
+<div id="register-container">
+  <button mat-icon-button mat-dialog-close id="quitBtn" tabindex="-1"><mat-icon>backspace</mat-icon></button>
+  <h1>Join ShareTodo!</h1>
+  <form (ngSubmit)="signup(registerForm)" [formGroup]="registerForm" novalidate>
+    <div class="form-fields">
+      <mat-form-field>
+        <input matInput placeholder="Email" name="emailAddr" formControlName="email">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Username" name="emailAddr" formControlName="username">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Password" name="password" formControlName="password" type="password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Confirm your password" name="password" formControlName="confirmedPassword" type="password">
+      </mat-form-field>
+      <section class="radioBtn-options">
+        <label>Gender: </label>
+        <mat-radio-group formControlName="gender">
+            <mat-radio-button value="male" >Male</mat-radio-button>
+            <mat-radio-button value="female">Female</mat-radio-button>
+            <mat-radio-button value="unknown">Prefer not to disclose</mat-radio-button>
+        </mat-radio-group>
+      </section>
+      <section>
+        <mat-checkbox formControlName="isPublic">Make my email public to others</mat-checkbox>
+      </section>
+
+    </div>
+    <div class="form-btns">
+      <button mat-raised-button type="submit" color="primary" [disabled]="registerForm.invalid">Sign up</button>
+    </div>
+    </form>
+</div>

@@ -3,18 +3,18 @@
   <img id="friend-img"src="http://x.webdo.cc/userfiles/66053383/image/%E6%96%B0%E6%9C%8B%E5%8F%8B-01.png" alt="">
 
   <div id="form-container">
-    <form #loginForm="ngForm">
+    <form (ngSubmit)="login(loginForm)" [formGroup]="loginForm" novalidate>
       <div class="form-fields">
         <mat-form-field>
-            <input matInput placeholder="Email" [formControl]="email" name="emailAddr" required>
+            <input matInput placeholder="Email" name="emailAddr" formControlName="email">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Password" required>
+            <input matInput placeholder="Password" name="password" formControlName="password" type="password">
         </mat-form-field>
       </div>
       <div class="form-btns">
-        <button mat-raised-button (click)="login()" color="primary">Log In</button>
-        <button mat-raised-button (click)="signup()" color="primary">Sign up</button>
+        <button mat-raised-button type="submit" color="primary" [disabled]="loginForm.invalid">Log In</button>
+        <button mat-raised-button (click)="signup()" type="button" color="primary">Sign up</button>
       </div>
     </form>
   </div>
