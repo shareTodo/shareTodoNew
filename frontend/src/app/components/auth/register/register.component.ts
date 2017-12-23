@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormControl, Validators, FormGroup, AbstractControl, ValidatorFn, FormBuilder } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
@@ -8,25 +8,27 @@ import { FormControl, Validators, FormGroup, AbstractControl, ValidatorFn } from
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required]),
-    confirmedPassword: new FormControl('', [Validators.required, identicalPasswordValidator(this.registerForm.get('confirmedPassword').value)]),
-    gender: new FormControl('', [Validators.required]),
-    isPublic: new FormControl()
-  });
+  registerForm: FormGroup;
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
-    console.log(this.registerForm.get('confirmedPassword').value)
+    this.registerForm = this.fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      username:['', Validators.required],
+      passwords: this.fb.group({
+        password: ['', Validators.required],
+        confirmedPassword: ['', Validators.required]},
+        {validator: this.areEqual}),
+      gender: ['', Validators.required],
+      isPublic: ''
+    });
   }
 
-}
+  /** Confirmed password should the same as the original one */
+  areEqual(group: FormGroup) {
+    var isValid = group.value["password"] === group.value["confirmedPassword"];
+    return isValid? null: {"areEqual": "password should be the same"};
+  }
 
-/** Confirmed password should the same as the original one */
-function identicalPasswordValidator(password: string): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
-    const isIdentical = control.value === password;
-    return isIdentical? null : {"IdenticalPassword": "password should be the same"};
-  };
 }

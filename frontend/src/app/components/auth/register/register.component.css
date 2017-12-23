@@ -1,8 +1,12 @@
 #register-container {
   position: relative;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
 }
-#register-container .form-fields {
+#register-container .form-fields, .passwordFields {
   display: inline-grid;
+}
+#register-container .form-warn {
+  color: red;
 }
 
 #register-container .radioBtn-options {

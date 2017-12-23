@@ -4,17 +4,23 @@
   <form (ngSubmit)="signup(registerForm)" [formGroup]="registerForm" novalidate>
     <div class="form-fields">
       <mat-form-field>
-        <input matInput placeholder="Email" name="emailAddr" formControlName="email">
+        <input matInput placeholder="Email" formControlName="email">
       </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Username" name="emailAddr" formControlName="username">
+        <input matInput placeholder="Username" formControlName="username">
       </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Password" name="password" formControlName="password" type="password">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Confirm your password" name="password" formControlName="confirmedPassword" type="password">
-      </mat-form-field>
+      <div class="passwordFields" formGroupName="passwords">
+        <mat-form-field>
+          <input matInput placeholder="Password" formControlName="password" type="password">
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Confirm your password" formControlName="confirmedPassword" type="password">
+        </mat-form-field>
+        <div class="form-warn" *ngIf="registerForm.controls.passwords?.errors?.areEqual">
+            The two passwords aren't the same
+        </div>
+      </div>
+
       <section class="radioBtn-options">
         <label>Gender: </label>
         <mat-radio-group formControlName="gender">

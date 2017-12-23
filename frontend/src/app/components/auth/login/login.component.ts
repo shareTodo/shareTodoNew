@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormControl, Validators, FormGroup, AbstractControl, ValidatorFn } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { RegisterComponent } from '../register/register.component';
 
@@ -11,32 +11,25 @@ import { RegisterComponent } from '../register/register.component';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required])
-  });
-  constructor(public dialog: MatDialog) {
+  loginForm: FormGroup;
+
+  constructor(public dialog: MatDialog, private fb: FormBuilder) {
   }
 
   ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
   }
 
   signup() : void {
     let dialogRef = this.dialog.open(RegisterComponent, {
       disableClose: true,
-      height: '460px',
+      height: '500px',
       width: '550px',
     });
   }
 
-}
-
-import {  } from '@angular/forms';
-/** Confirmed password should the same as the original one */
-export function identicalPasswordValidator(password: string): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
-    const isIdentical = control.value === password;
-    return isIdentical? null : {"IdenticalPassword": "password should be the same"};
-  };
 }
