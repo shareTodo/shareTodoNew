@@ -1,17 +1,14 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+var user = require('./src/routes/user');
+var friend = require('./src/routes/friend');
 
-var requestTime = function (req, res, next) {
-  req.requestTime = Date.now()
-  next()
-}
-
-app.use(requestTime);
+app.use('/user', user);
+app.use('/friend', friend);
 
 app.get('/', (req, res) => {
-  var responseText = "Request sent at" + req.requestTime;
-  res.send(responseText);
+  res.send('Welcome to my app');
 });
 // set up the port
 const port = 8000;
