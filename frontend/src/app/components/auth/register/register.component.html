@@ -35,7 +35,7 @@
 
     </div>
     <div class="form-btns">
-      <button mat-raised-button type="submit" color="primary" [disabled]="registerForm.invalid">Sign up</button>
+      <button mat-raised-button type="submit" color="primary" [disabled]="registerForm.invalid && !submitting">Sign up</button>
     </div>
     </form>
 </div>

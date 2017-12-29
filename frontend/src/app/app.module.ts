@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 // UI libs
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule, MatInputModule } from '@angular/material';
@@ -40,7 +41,8 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     MatDialogModule,
     MatRadioModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    HttpClientModule
   ],
   providers: [
   ],

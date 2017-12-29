@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators, FormGroup, AbstractControl, ValidatorFn, FormBuilder } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   moduleId: module.id,
@@ -9,8 +10,9 @@ import { FormControl, Validators, FormGroup, AbstractControl, ValidatorFn, FormB
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
+  submitting: boolean;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private http:HttpClient) {}
 
   ngOnInit() {
     this.registerForm = this.fb.group({
@@ -23,12 +25,33 @@ export class RegisterComponent implements OnInit {
       gender: ['', Validators.required],
       isPublic: ''
     });
+    this.submitting = false;
   }
 
   /** Confirmed password should the same as the original one */
   areEqual(group: FormGroup) {
     var isValid = group.value["password"] === group.value["confirmedPassword"];
     return isValid? null: {"areEqual": "password should be the same"};
+  }
+
+  signup(signupForm) {
+    this.submitting = true;
+    this.registerForm.disable();
+    let formInfo = signupForm.value;
+    let signupInfo = {"email": formInfo.email,
+                      "username": formInfo.username,
+                      "password": formInfo.passwords.password,
+                      "gender": formInfo.gender,
+                      "isPublic": formInfo.isPublic === true};
+
+    this.http.post('api/use1r', signupInfo).subscribe(
+      data => {
+        console.log(data);
+        this.registerForm.enable();
+      },
+      err => {
+        console.log(err);
+    });
   }
 
 }
