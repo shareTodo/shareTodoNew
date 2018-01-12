@@ -44,7 +44,7 @@ export class RegisterComponent implements OnInit {
                       "gender": formInfo.gender,
                       "isPublic": formInfo.isPublic === true};
 
-    this.http.post('api/use1r', signupInfo).subscribe(
+    this.http.post('api/user', signupInfo).subscribe(
       data => {
         console.log(data);
         this.registerForm.enable();
